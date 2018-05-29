@@ -12,7 +12,7 @@ Based off of the old board game. The user enters a number, which generates a hid
 * **Curtis Wilcox** - [Quillcox](https://github.com/Quillcox)
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ## Acknowledgments
 Thanks to the creators of *Mastermind*.
