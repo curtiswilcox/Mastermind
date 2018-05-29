@@ -1,30 +1,33 @@
 use std::cmp;
 use std::fmt;
 
+pub const NUM_COLORS: u32 = 9;
+
 #[derive(Clone, Debug)]
 pub enum Color {
-    Pink,
+    Red,
     Orange,
     Yellow,
     Green,
     Blue,
+    Indigo,
     Purple,
     Black,
     White,
-    Found, // for checking purposes
 }
 
 impl Color {
     pub fn new(n: u32) -> Option<Color> {
         match n {
-            0 => Some(Color::Pink),
+            0 => Some(Color::Red),
             1 => Some(Color::Orange),
             2 => Some(Color::Yellow),
             3 => Some(Color::Green),
             4 => Some(Color::Blue),
-            5 => Some(Color::Purple),
-            6 => Some(Color::Black),
-            7 => Some(Color::White),
+            5 => Some(Color::Indigo),
+            6 => Some(Color::Purple),
+            7 => Some(Color::Black),
+            8 => Some(Color::White),
             _ => None
         }
     }
