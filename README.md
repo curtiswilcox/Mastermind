@@ -1,7 +1,7 @@
 # Mastermind
 
 ## Game Description
-Based off of the old board game. There is a hidden code comprised of a number (based off of the user's decision) of colors (ROY G BIV + black/white). The user can then guess what the code is. 
+Based off of the old board game. The user enters a number, which generates a hidden code comprised of that many colors (ROY G BIV + black/white), where duplicates are allowed. The user can then guess what the code is. 
 
 ### Possible Responses
 * -- => the guess was completely wrong; 
