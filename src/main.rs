@@ -15,9 +15,14 @@ fn main() {
     let answer = get_answer(num_pegs);
     let (solved, guess_counter) = play(&answer, num_pegs);
     if solved {
-        println!("Congratulations! You guessed the code in {} tries! The code was: ", guess_counter);
+        let try_tries = match 12 - guess_counter {
+            1 => "try",
+            _ => "tries",
+        };
+        print!("Congratulations! You guessed the code with {} {} remaining! The code was ",
+               12 - guess_counter, try_tries);
     } else {
-        print!("Sorry, you're out of guesses. The code was: ");
+        print!("Sorry, you're out of guesses. The code was ");
     }
     for i in 0..answer.len() - 1 {
         print!("{}, ", answer[i])
@@ -40,7 +45,7 @@ fn get_num_pegs() -> u32 {
                     println!("Please enter a number greater than 1.");
                     0
                 }
-            }
+            },
             Err(_) => {
                 println!("Please enter a number greater than 1.");
                 0
@@ -51,19 +56,19 @@ fn get_num_pegs() -> u32 {
 }
 
 fn play(answer: &Vec<Peg>, num_pegs: u32) -> (bool, u32) {
-    let mut guess_counter = 0;
+    let mut guess_counter = 1;
     let mut solved = false;
     while guess_counter < 13 {
         let mut guess = String::new();
         let mut modified_guess = String::new();
         while guess == "" {
-            print!("Enter your guess: ");
+            print!("{}/12\tEnter your guess: ", guess_counter);
             io::stdout().flush().expect("Flush failed...");
             match io::stdin().read_line(&mut guess) {
                 Ok(_) => {}
                 Err(err) => println!("Uh oh! {}", err),
             }
-//            guess.retain(|c| {
+//            guess.retain(|c| { // unstable code
 //                c.is_alphabetic()
 //            });
 
@@ -71,12 +76,13 @@ fn play(answer: &Vec<Peg>, num_pegs: u32) -> (bool, u32) {
                 c.is_alphabetic()
             }).collect::<String>();
             if modified_guess.chars().count() as u32 != num_pegs {
-                println!("Please enter {} letters.", &num_pegs);
+                println!("\t\tPlease enter {} letters.", &num_pegs);
                 guess = String::new()
             }
         }
         let mut guess_convert = peg::convert(modified_guess);
         let result = check_answer(&mut guess_convert, &mut answer.clone());
+        print!("\t\t");
         if result.len() > 0 {
             for r in &result {
                 print!("{} ", r)
@@ -112,17 +118,17 @@ fn check_answer(guess: &mut Vec<Peg>, answer: &mut Vec<Peg>) -> Vec<u32> {
         !p.found()
     });
 
-    for i in 0..guess.len() {
-        if answer.contains(&guess[i]) {
+    for g in guess.iter() {
+        if answer.contains(g) {
             let index = answer.iter().position(|p| {
-                p.color() == guess[i].color()
+                p.color() == g.color()
             }).unwrap();
             if !answer[index].found() {
                 result.push(0);
                 answer[index].find();
             }
         } else {
-            continue;
+            continue
         }
     }
     result
