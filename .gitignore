@@ -1,6 +1,4 @@
 /target
 **/*.rs.bk
 .idea/*
-*.lock
-*.toml
 *.iml
