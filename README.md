@@ -3,6 +3,17 @@
 ## Game Description
 Based off of the old board game. The user enters a number, which generates a hidden code comprised of that many colors (ROY G BIV + black/white), where duplicates are allowed. The user then has 12 attempts to guess what the code is. 
 
+### Possible Guesses
+* R => Red;
+* O => Orange;
+* Y => Yellow;
+* G => Green;
+* L => Blue;
+* I => Indigo;
+* P => Purple;
+* B => Black;
+* W => White.
+
 ### Possible Responses
 * \- => the guess was completely wrong; 
 * 0 => the color is correct, but it is in the wrong place; 
@@ -10,6 +21,7 @@ Based off of the old board game. The user enters a number, which generates a hid
 
 ## Authors
 * **Curtis Wilcox** - [Quillcox](https://github.com/Quillcox)
+* **Jacob Wunder** - [jaywunder](https://github.com/jaywunder)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
