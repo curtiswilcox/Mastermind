@@ -47,21 +47,28 @@ impl fmt::Display for Peg {
     }
 }
 
+impl Into<Peg> for char {
+    fn into(self) -> Peg {
+        use Color::*;
+        match self.to_lowercase().to_string().as_ref() {
+            "r" => Peg::new(Red),
+            "o" => Peg::new(Orange),
+            "y" => Peg::new(Yellow),
+            "g" => Peg::new(Green),
+            "l" => Peg::new(Blue),
+            "i" => Peg::new(Indigo),
+            "p" => Peg::new(Purple),
+            "b" => Peg::new(Black),
+            "w" => Peg::new(White),
+            _ => Peg::new(Black),
+        }
+    }
+}
+
 pub fn convert(guess: String) -> Vec<Peg> {
     let mut converted: Vec<Peg> = Vec::new();
     for c in guess.chars() {
-        match c.to_lowercase().to_string().as_ref() {
-            "r" => converted.push(Peg::new(Color::Red)),
-            "o" => converted.push(Peg::new(Color::Orange)),
-            "y" => converted.push(Peg::new(Color::Yellow)),
-            "g" => converted.push(Peg::new(Color::Green)),
-            "l" => converted.push(Peg::new(Color::Blue)),
-            "i" => converted.push(Peg::new(Color::Indigo)),
-            "p" => converted.push(Peg::new(Color::Purple)),
-            "b" => converted.push(Peg::new(Color::Black)),
-            "w" => converted.push(Peg::new(Color::White)),
-            _ => {},
-        }
+        converted.push(c.into());
     }
     converted
 }
