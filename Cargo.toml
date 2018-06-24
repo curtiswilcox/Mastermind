@@ -1,7 +1,7 @@
 [package]
 name = "mastermind"
 version = "0.1.0"
-authors = ["Curtis Wilcox <Curtis.Wilcox@uvm.edu>"]
+authors = ["Curtis Wilcox <Curtis.Wilcox@uvm.edu>", "Jacob Wunder <jacob@jacobwunder.com>"]
 
 [dependencies]
 rand = "0.5.0"
