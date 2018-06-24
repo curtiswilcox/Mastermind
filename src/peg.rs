@@ -1,4 +1,5 @@
-use color::Color;
+use rand::{self, Rng};
+use color::{self, Color};
 use std::cmp;
 use std::fmt;
 
@@ -12,6 +13,13 @@ impl Peg {
     pub fn new(color: Color) -> Peg {
         Peg {
             color,
+            found: false,
+        }
+    }
+
+    pub fn new_random() -> Peg {
+        Peg {
+            color: Color::new(rand::thread_rng().gen_range(0, color::NUM_COLORS)).unwrap(),
             found: false,
         }
     }

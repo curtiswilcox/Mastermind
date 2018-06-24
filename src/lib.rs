@@ -16,9 +16,61 @@ pub enum Correctness {
 }
 
 pub struct GameState {
-    answer: Vec<Peg>
+    answer: Vec<Peg>,
+    current_turn: u32,
 }
 
-pub fn step(state: &mut GameState, guess: Vec<Peg>) -> Option<Vec<Correctness>> {
-    unimplemented!()
+
+impl GameState {
+
+    pub fn new(num_pegs: usize) -> GameState {
+        let answer: Vec<Peg> = Vec::with_capacity(num_pegs)
+            .into_iter()
+            .map(|x: usize| Peg::new_random())
+            .collect();
+
+        GameState {
+            answer,
+            current_turn: 0,
+        }
+    }
+
+    pub fn step(&mut self, guess: Vec<Peg>) -> Vec<Correctness> {
+
+        self.current_turn += 1;
+
+        self.make_guess_response(guess)
+
+    }
+
+    fn make_guess_response(&mut self, guess: Vec<Peg>) -> Vec<Correctness> {
+        use Correctness::*;
+
+        let mut answer = self.answer.clone();
+        let mut result: Vec<Correctness> = Vec::new();
+
+        for i in 0..guess.len() {
+            if guess[i].color() == answer[i].color() && !answer[i].found() {
+                result.push(Total);
+                answer[i].find();
+                guess[i].find();
+            }
+        }
+
+        guess.retain(|p| !p.found() );
+        answer.retain(|p| !p.found() );
+
+        for g in guess.iter() {
+            answer.iter()
+            .position(|p| p.color() == g.color())
+            .map(|index| {
+                if !answer[index].found() {
+                    result.push(Partial);
+                    answer[index].find();
+                }
+            });
+        }
+
+        result
+    }
 }
