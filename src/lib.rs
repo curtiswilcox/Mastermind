@@ -43,7 +43,7 @@ impl GameState {
 
     }
 
-    fn make_guess_response(&mut self, guess: Vec<Peg>) -> Vec<Correctness> {
+    fn make_guess_response(&mut self, mut guess: Vec<Peg>) -> Vec<Correctness> {
         use Correctness::*;
 
         let mut answer = self.answer.clone();
