@@ -17,19 +17,18 @@ pub enum Color {
 }
 
 impl Color {
-    pub fn new(n: u32) -> Option<Color> {
+    pub fn new(n: u32) -> Color {
         use color::Color::*;
         match n {
-            0 => Some(Red),
-            1 => Some(Orange),
-            2 => Some(Yellow),
-            3 => Some(Green),
-            4 => Some(Blue),
-            5 => Some(Indigo),
-            6 => Some(Purple),
-            7 => Some(Black),
-            8 => Some(White),
-            _ => None
+            0 => Red,
+            1 => Orange,
+            2 => Yellow,
+            3 => Green,
+            4 => Blue,
+            5 => Indigo,
+            6 => Purple,
+            7 => Black,
+            _ => White
         }
     }
 }

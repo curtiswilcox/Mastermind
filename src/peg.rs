@@ -19,7 +19,7 @@ impl Peg {
 
     pub fn new_random() -> Peg {
         Peg {
-            color: Color::new(rand::thread_rng().gen_range(0, color::NUM_COLORS)).unwrap(),
+            color: Color::new(rand::thread_rng().gen_range(0, color::NUM_COLORS)),
             found: false,
         }
     }

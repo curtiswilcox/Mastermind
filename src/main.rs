@@ -66,7 +66,6 @@ fn get_answer(num_pegs: u32) -> Vec<Peg> {
         pegs.push(
             Peg::new(
                 Color::new(rand::thread_rng().gen_range(0, color::NUM_COLORS))
-                    .unwrap()
             )
         );
     }

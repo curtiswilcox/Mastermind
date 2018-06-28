@@ -41,13 +41,16 @@ pub struct GameState {
     current_turn: u32,
 }
 
-
 impl GameState {
     pub fn new(num_pegs: usize) -> GameState {
         let answer: Vec<Peg> = (0..num_pegs)
             .map(|x: usize| Peg::new_random())
             .collect();
 
+        GameState::new_with_answer(answer)
+    }
+
+    pub fn new_with_answer(answer: Vec<Peg>) -> GameState {
         GameState {
             answer,
             current_turn: 0,
