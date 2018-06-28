@@ -36,6 +36,12 @@ pub enum Correctness {
     Total,
 }
 
+impl fmt::Display for Correctness {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{:?}", self)
+    }
+}
+
 pub struct GameState {
     answer: Vec<Peg>,
     current_turn: u32,
