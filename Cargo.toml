@@ -1,6 +1,6 @@
 [package]
 name = "mastermind"
-version = "0.1.4"
+version = "0.1.5"
 authors = ["Curtis Wilcox <Curtis.Wilcox@uvm.edu>", "Jacob Wunder <jacob@jacobwunder.com>"]
 description = "Based off of the old board game. The user enters a number, which generates a hidden code comprised of that many colors (ROY G BIV + black/white), where duplicates are allowed. The user then has 12 attempts to guess what the code is. See the rest on GitHub."
 license = "MIT"
