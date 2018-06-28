@@ -11,8 +11,29 @@ use std::io;
 use io::Write;
 pub use peg::Peg;
 
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_game_step() {
+
+        let mut state = GameState::new(4);
+        let guess = vec![Peg::new(Color::Red), Peg::new(Color::Red), Peg::new(Color::Red), Peg::new(Color::Red)];
+        let validity = state.step(guess);
+
+        println!("{:?}", validity);
+        // cargo test -- --nocapture
+    }
+}
+
+
+#[derive(Debug)]
 pub enum Correctness {
-    Partial, Total
+    Partial,
+    Total,
 }
 
 pub struct GameState {
@@ -22,10 +43,8 @@ pub struct GameState {
 
 
 impl GameState {
-
     pub fn new(num_pegs: usize) -> GameState {
-        let answer: Vec<Peg> = Vec::with_capacity(num_pegs)
-            .into_iter()
+        let answer: Vec<Peg> = (0..num_pegs)
             .map(|x: usize| Peg::new_random())
             .collect();
 
@@ -36,17 +55,16 @@ impl GameState {
     }
 
     pub fn step(&mut self, guess: Vec<Peg>) -> Vec<Correctness> {
-
         self.current_turn += 1;
 
         self.make_guess_response(guess)
-
     }
 
     fn make_guess_response(&mut self, mut guess: Vec<Peg>) -> Vec<Correctness> {
         use Correctness::*;
 
         let mut answer = self.answer.clone();
+        // println!("ANSWER {:?}", self.answer);
         let mut result: Vec<Correctness> = Vec::new();
 
         for i in 0..guess.len() {
@@ -57,20 +75,19 @@ impl GameState {
             }
         }
 
-        guess.retain(|p| !p.found() );
-        answer.retain(|p| !p.found() );
+        guess.retain(|p| !p.found());
+        answer.retain(|p| !p.found());
 
         for g in guess.iter() {
             answer.iter()
-            .position(|p| p.color() == g.color())
-            .map(|index| {
-                if !answer[index].found() {
-                    result.push(Partial);
-                    answer[index].find();
-                }
-            });
+                .position(|p| p.color() == g.color())
+                .map(|index| {
+                    if !answer[index].found() {
+                        result.push(Partial);
+                        answer[index].find();
+                    }
+                });
         }
-
         result
     }
 }
