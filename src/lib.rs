@@ -7,6 +7,7 @@ mod peg;
 
 pub use color::Color;
 use rand::Rng;
+use std::fmt;
 use std::io;
 use io::Write;
 pub use peg::Peg;
