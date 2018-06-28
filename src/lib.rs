@@ -5,7 +5,7 @@ extern crate rand;
 mod color;
 mod peg;
 
-use color::Color;
+pub use color::Color;
 use rand::Rng;
 use std::io;
 use io::Write;
